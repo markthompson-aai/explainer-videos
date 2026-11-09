@@ -1,0 +1,9 @@
+{
+  "name": "explainer-videos",
+  "version": "0.1.0",
+  "description": "Learn any topic as a narrated slide video: /explainer-videos:learn <topic> researches it, writes the script, renders diagram slides, voices them with AssemblyAI TTS and builds a captioned MP4 plus an audio-only M4A.",
+  "author": { "name": "Mark Thompson" },
+  "homepage": "https://github.com/markthompson-aai/explainer-videos",
+  "license": "MIT",
+  "keywords": ["learning", "video", "text-to-speech", "assemblyai", "slides"]
+}

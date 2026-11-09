@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>slide</title>
+<style>
+  :root {
+    --bg: #f7f7fb;
+    --ink: #15132b;
+    --muted: #5d5a7a;
+    --line: #d9d7ea;
+    --accent: #3923c7;      /* Cobolt */
+    --accent-soft: #e6e2fb;
+    --accent-2: #0ea5a4;
+    --warm: #f59e0b;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Helvetica Neue", -apple-system, "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: 34px; line-height: 1.35;
+    display: flex; flex-direction: column;
+  }
+  header {
+    height: 86px; padding: 0 84px; display: flex; align-items: center; justify-content: space-between;
+    color: var(--muted); font-size: 24px; letter-spacing: 0.01em;
+  }
+  header .topic::before { content: ""; display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: var(--accent); margin-right: 14px; vertical-align: -1px; }
+  main { flex: 1; padding: 10px 84px 0; display: flex; flex-direction: column; }
+  main > h2 { font-size: 58px; line-height: 1.1; margin: 0 0 36px; font-weight: 700; letter-spacing: -0.015em; }
+  .content { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 150px; } /* bottom band stays clear for captions */
+  footer { height: 0; }
+
+  /* title slide */
+  .title-slide { display: flex; flex-direction: column; justify-content: center; height: 100%; padding-bottom: 120px; }
+  .title-slide h1 { font-size: 96px; line-height: 1.05; margin: 0 0 28px; letter-spacing: -0.02em; max-width: 1500px; }
+  .title-slide .subtitle { font-size: 40px; color: var(--muted); margin: 0; max-width: 1400px; }
+  .title-slide::before { content: ""; width: 120px; height: 12px; background: var(--accent); border-radius: 6px; margin-bottom: 44px; }
+
+  /* text */
+  p { margin: 0 0 18px; }
+  .note { color: var(--muted); font-size: 28px; margin-top: 28px; }
+  .kicker { color: var(--accent); font-weight: 600; font-size: 26px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  ul { margin: 0; padding-left: 1.1em; } li { margin: 0 0 16px; } li::marker { color: var(--accent); }
+  b, strong { font-weight: 700; } small { display: block; font-size: 24px; color: var(--muted); font-weight: 400; margin-top: 6px; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 0.85em; background: var(--accent-soft); padding: 2px 10px; border-radius: 8px; }
+
+  /* layouts */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 36px; align-items: stretch; }
+  .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; align-items: stretch; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 30px 34px; font-size: 30px; }
+  .card h3 { margin: 0 0 12px; font-size: 32px; color: var(--accent); }
+  .card.accent { border-color: var(--accent); background: var(--accent-soft); }
+  .big { font-size: 92px; font-weight: 700; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
+  .big small { font-size: 26px; margin-top: 12px; }
+
+  /* flow diagram: <div class="flow"><div class="box">A</div><span class="arrow"></span><div class="box">B</div></div> */
+  .flow { display: flex; align-items: stretch; justify-content: center; gap: 0; margin: 20px 0; }
+  .flow .box { flex: 1; background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 26px 22px; text-align: center; font-size: 30px; display: flex; flex-direction: column; justify-content: center; }
+  .flow .box.accent { border-color: var(--accent); background: var(--accent-soft); }
+  .flow .box.warm { border-color: var(--warm); background: #fff4df; }
+  .flow .arrow { flex: 0 0 56px; position: relative; align-self: center; height: 4px; background: var(--muted); margin: 0 6px; }
+  .flow .arrow::after { content: ""; position: absolute; right: -2px; top: -9px; border: 11px solid transparent; border-left: 16px solid var(--muted); border-right: 0; }
+  .flow.vertical { flex-direction: column; } .flow.vertical .arrow { width: 4px; height: 44px; align-self: center; }
+  .flow.vertical .arrow::after { right: -9px; top: auto; bottom: -2px; border: 11px solid transparent; border-top: 16px solid var(--muted); border-bottom: 0; }
+
+  /* horizontal bars: <div class="bars"><div class="bar" style="--w:40%"><span>Label</span><i></i><em>120 ms</em></div></div> */
+  .bars { display: flex; flex-direction: column; gap: 22px; }
+  .bar { display: grid; grid-template-columns: 420px 1fr 200px; align-items: center; gap: 24px; font-size: 30px; }
+  .bar i { display: block; height: 44px; width: var(--w); background: var(--accent); border-radius: 10px; }
+  .bar.warm i { background: var(--warm); } .bar.teal i { background: var(--accent-2); } .bar.muted i { background: var(--line); }
+  .bar em { font-style: normal; color: var(--muted); }
+
+  /* step list with numbers */
+  .steps { counter-reset: step; display: flex; flex-direction: column; gap: 18px; }
+  .steps > div { counter-increment: step; display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: baseline; font-size: 32px; }
+  .steps > div::before { content: counter(step); width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 26px; }
+
+  /* timeline rows: <div class="timeline"><div><span class="t">0.4 s</span><span class="txt">smoke from <mark>hundreds</mark></span><span class="tag">partial</span></div></div> */
+  .timeline { display: flex; flex-direction: column; gap: 14px; font-size: 32px; }
+  .timeline > div { display: grid; grid-template-columns: 140px 1fr 180px; gap: 24px; align-items: center; padding: 14px 24px; background: var(--card); border: 2px solid var(--line); border-radius: 14px; }
+  .timeline .t { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .timeline mark { background: var(--accent-soft); color: var(--accent); padding: 0 8px; border-radius: 6px; }
+  .timeline .tag { justify-self: end; font-size: 24px; padding: 6px 16px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .timeline > div.final { border-color: var(--accent); } .timeline > div.final .tag { background: var(--accent); color: #fff; }
+
+  svg { display: block; }
+  svg text { font-family: inherit; }
+</style>
+</head>
+<body class="layout-{{layout}}">
+  <header><span class="topic">{{topic}}</span><span class="counter">{{counter}}</span></header>
+  <main>
+    {{heading}}
+    <div class="content">{{body}}</div>
+  </main>
+  <footer></footer>
+</body>
+</html>

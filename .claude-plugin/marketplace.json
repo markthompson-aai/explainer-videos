@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "explainer-videos",
+  "owner": { "name": "Mark Thompson" },
+  "metadata": { "description": "Narrated slide videos for learning, built from a Markdown script with headless Chrome, AssemblyAI text-to-speech and ffmpeg." },
+  "plugins": [
+    {
+      "name": "explainer-videos",
+      "source": "./",
+      "description": "Learn any topic as a narrated slide video: /explainer-videos:learn <topic> researches it, writes the script, renders diagram slides, voices them with AssemblyAI TTS and builds a captioned MP4 plus an audio-only M4A.",
+      "version": "0.1.0",
+      "category": "learning"
+    }
+  ]
+}
